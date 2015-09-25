@@ -1,11 +1,11 @@
 # getting-cleaning-data-project
 #download data
-if(!file.exists("./data")){dir.create("./data")}
-fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip?accessType=DOWNLOAD"
-download.file(fileUrl, destfile="./data/project", method="curl")
-unzip("./data/project")
+if(!file.exists("./data")){dir.create("./data")}  
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip?accessType=DOWNLOAD" 
+download.file(fileUrl, destfile="./data/project", method="curl")  
+unzip("./data/project") 
 
-#label all variables; generate dataframes with subject, activity and measurement 
+#label all variables; generate dataframes with subject, activity and measurement using rbind and cbind
 
 file1 <- read.table("./UCI HAR Dataset/test/X_test.txt")  
 fileFeature <- read.table("./UCI HAR Dataset/features.txt") 
@@ -24,30 +24,30 @@ fileTrain <- cbind(file5, file6, file4)
 colnames(fileTrain)[1] <- "subject" 
 colnames(fileTrain)[2] <- "activity"  
 
-#Assignment 1 # combine test and train data
+#Assignment 1 # combine test and train data, the full set is named all
 all <- rbind(fileTest, fileTrain)
 
-#Assignment 2 # extracts useful measurement by grep 
+#Assignment 2 # extracts useful measurement by grep, the subset data is called shortAll
 
 subsetNames <- grep("std\\(\\)|mean\\(\\)|subject|activity", names(all), value = FALSE)
 shortAll <- all[subsetNames]
 
 #Assignment 3 # Uses descriptive activity names to name the activities in the data set
-shortAll$activity <- as.character(shortAll$activity)
-shortAll$activity[all$activity == 1] <- "Walking"
-shortAll$activity[all$activity == 2] <- "Walking Upstairs"
-shortAll$activity[all$activity == 3] <- "Walking Downstairs"
-shortAll$activity[all$activity == 4] <- "Sitting"
-shortAll$activity[all$activity == 5] <- "Standing"
-shortAll$activity[all$activity == 6] <- "Laying"
-shortAll$activity <- as.factor(shortAll$activity)
+shortAll$activity <- as.character(shortAll$activity)  
+shortAll$activity[all$activity == 1] <- "Walking" 
+shortAll$activity[all$activity == 2] <- "Walking Upstairs"  
+shortAll$activity[all$activity == 3] <- "Walking Downstairs"  
+shortAll$activity[all$activity == 4] <- "Sitting" 
+shortAll$activity[all$activity == 5] <- "Standing"  
+shortAll$activity[all$activity == 6] <- "Laying"  
+shortAll$activity <- as.factor(shortAll$activity) 
 
 #Assignment 4 # label the data set with descriptive variable names
-names(shortAll) <- gsub("Acc", "Accelerator", names(shortAll))
-names(shortAll) <- gsub("Mag", "Magnitude", names(shortAll))
-names(shortAll) <- gsub("Gyro", "Gyroscope", names(shortAll))
-names(shortAll) <- gsub("^t", "time", names(shortAll))
-names(shortAll) <- gsub("^f", "frequency", names(shortAll))
+names(shortAll) <- gsub("Acc", "Accelerator", names(shortAll))  
+names(shortAll) <- gsub("Mag", "Magnitude", names(shortAll))  
+names(shortAll) <- gsub("Gyro", "Gyroscope", names(shortAll)) 
+names(shortAll) <- gsub("^t", "time", names(shortAll))  
+names(shortAll) <- gsub("^f", "frequency", names(shortAll)) 
 
 #change the subject names
 shortAll$subject <- as.character(shortAll$subject)
