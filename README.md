@@ -7,22 +7,22 @@ unzip("./data/project")
 
 #label all variables; generate dataframes with subject, activity and measurement 
 
-file1 <- read.table("./UCI HAR Dataset/test/X_test.txt")
-fileFeature <- read.table("./UCI HAR Dataset/features.txt")
-colnames(file1) <- t(fileFeature[2])
-file2 <- read.table("./UCI HAR Dataset/test/subject_test.txt")
-file3 <- read.table("./UCI HAR Dataset/test/y_test.txt")
-fileTest <- cbind(file2, file3, file1)
-colnames(fileTest)[1] <- "subject"
-colnames(fileTest)[2] <- "activity"
+file1 <- read.table("./UCI HAR Dataset/test/X_test.txt")  
+fileFeature <- read.table("./UCI HAR Dataset/features.txt") 
+colnames(file1) <- t(fileFeature[2])  
+file2 <- read.table("./UCI HAR Dataset/test/subject_test.txt")  
+file3 <- read.table("./UCI HAR Dataset/test/y_test.txt")  
+fileTest <- cbind(file2, file3, file1)  
+colnames(fileTest)[1] <- "subject"  
+colnames(fileTest)[2] <- "activity" 
 
-file4 <- read.table("./UCI HAR Dataset/train/X_train.txt")
-colnames(file4) <- t(fileFeature[2])
-file5 <- read.table("./UCI HAR Dataset/train/subject_train.txt")
-file6 <- read.table("./UCI HAR Dataset/train/y_train.txt")
-fileTrain <- cbind(file5, file6, file4)
-colnames(fileTrain)[1] <- "subject"
-colnames(fileTrain)[2] <- "activity"
+file4 <- read.table("./UCI HAR Dataset/train/X_train.txt")  
+colnames(file4) <- t(fileFeature[2])  
+file5 <- read.table("./UCI HAR Dataset/train/subject_train.txt")  
+file6 <- read.table("./UCI HAR Dataset/train/y_train.txt")  
+fileTrain <- cbind(file5, file6, file4) 
+colnames(fileTrain)[1] <- "subject" 
+colnames(fileTrain)[2] <- "activity"  
 
 #Assignment 1 # combine test and train data
 all <- rbind(fileTest, fileTrain)
@@ -84,6 +84,6 @@ shortAll$subject[shortAll$subject == 30] <- "volunteer 30"
 shortAll$subject <- as.factor(shortAll$subject)
 
 #Assignment 5 # create a tidy set
-library(plyr)
-Data2<-aggregate(. ~subject + activity, shortAll, mean)
-write.table(Data2, file = "tidydata.txt",row.name=FALSE)
+library(plyr) 
+Data2<-aggregate(. ~subject + activity, shortAll, mean) 
+write.table(Data2, file = "tidydata.txt",row.name=FALSE)  
