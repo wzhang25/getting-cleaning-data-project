@@ -1,4 +1,6 @@
 # getting-cleaning-data-project
+Detail protocols for cleaning samsung data collected from 30 people and 6 activities.
+
 #download data
 if(!file.exists("./data")){dir.create("./data")}  
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip?accessType=DOWNLOAD" 
